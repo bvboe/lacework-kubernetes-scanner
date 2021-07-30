@@ -1,6 +1,6 @@
 #!/bin/sh
 echo `date` Scanning running images in the background
-docker ps --format "{{.Image}}" | xargs -L1 ./parse-event.sh &
+docker images --format '{{.Repository}}:{{.Tag}}' | xargs -L1 ./parse-event.sh &
 
 echo `date` echo Starting daemon
-docker events --filter 'event=start' --format '{{.From}}' | xargs -L1 ./parse-event.sh
+docker events --filter 'event=pull' --format '{{.ID}}' | xargs -L1 ./parse-event.sh
