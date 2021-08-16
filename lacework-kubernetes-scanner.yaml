@@ -35,16 +35,26 @@ spec:
           - name: run-sock
             mountPath: /var/run/docker.sock
         env:
-        - name: ACCESS_TOKEN
+        - name: LW_SCANNER_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               name: lacework-kubernetes-scanner-credentials
-              key: access_token
-        - name: ACCOUNT_NAME
+              key: lw_scanner_access_token
+        - name: LW_ACCOUNT_NAME
           valueFrom:
             secretKeyRef:
               name: lacework-kubernetes-scanner-credentials
-              key: account_name
+              key: lw_account_name
+        - name: LW_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: lacework-kubernetes-scanner-credentials
+              key: lw_api_key
+        - name: LW_API_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: lacework-kubernetes-scanner-credentials
+              key: lw_api_secret
       volumes:
         - name: run-sock
           hostPath:
