@@ -127,4 +127,4 @@ latest: Pulling from library/nginx
 Observe the scan automatically running in the other window.
 
 ## Scan cache
-Note that the scanner keeps a cache of already scanned images in `/tmp/scan-cache.txt`, which can be cleared by deleting the file.
+Note that the scanner keeps a cache of already scanned images in `/tmp/scan-cache.txt`, which can be cleared by deleting the file. It's also querying the lacework API to ensure each image is only scanned once.
