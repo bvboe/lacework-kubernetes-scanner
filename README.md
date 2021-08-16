@@ -14,12 +14,14 @@ $ brew install minikube
 $ minikube start
 ```
 
-## Create credentials for lw-scanner.
-See https://support.lacework.com/hc/en-us/articles/1500001777821-Integrate-Inline-Scanner for information on how to configure the lw-scanner.
+## Create credentials for lw-scanner and lacework cli
+See https://support.lacework.com/hc/en-us/articles/1500001777821-Integrate-Inline-Scanner and https://support.lacework.com/hc/en-us/articles/1500001558282-Install-and-Configure-the-Lacework-CLI for more information.
 ```
 kubectl create secret generic lacework-kubernetes-scanner-credentials \
-  --from-literal=access_token=<insert-token-here> \
-  --from-literal=account_name=<insert-accunt-name-here>
+  --from-literal=lw_scanner_access_token=<insert-lw-scanner-token-here> \
+  --from-literal=lw_account_name=<insert-lw-accunt-name-here> \
+  --from-literal=lw_api_key=<insert-lw-api-key> \
+  --from-literal=lw_api_secret=<insert-lw-api-secret>
 ```
 
 ## Deploy Kubernetes scanner
@@ -102,11 +104,13 @@ Resolving deltas: 100% (6/6), done.
 
 $ cd lacework-kubernetes-scanner/src
 ```
-## Configure scanner
-See https://support.lacework.com/hc/en-us/articles/1500001777821-Integrate-Inline-Scanner for information on how to configure the lw-scanner.
+## Configure scanner and lacework cli
+See https://support.lacework.com/hc/en-us/articles/1500001777821-Integrate-Inline-Scanner and https://support.lacework.com/hc/en-us/articles/1500001558282-Install-and-Configure-the-Lacework-CLI for more information.
 ```
-$ export ACCESS_TOKEN=<insert-token-here>
-$ export ACCOUNT_NAME=<insert-accunt-name-here>
+$ export LW_SCANNER_ACCESS_TOKEN=<insert-lw-scanner-token-here>
+$ export LW_ACCOUNT_NAME=<insert-lw-accunt-name-here>
+$ export LW_API_KEY=<insert-lw-api-key>
+$ export LW_API_SECRET=<insert-lw-api-secret>
 ```
 ## Start scanner
 ```
