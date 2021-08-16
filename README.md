@@ -72,3 +72,55 @@ Evaluating image: Done!
     Created At  2021-07-22T10:13:19.618Z                                                      Low           22         0
     Tags        latest                                                                        Info          66         1
 ```
+## Delete scanner
+```
+$ kubectl delete -f https://raw.githubusercontent.com/bvboe/lacework-kubernetes-scanner/main/lacework-kubernetes-scanner.yaml
+```
+## Shut down Minikube
+```
+$ minikube delete
+```
+# Run images scanner locally on your desktop
+## Pre-requisites
+* Install Docker desktop
+* Lacework lw-scanner downloaded from https://github.com/lacework/lacework-vulnerability-scanner/releases and in the execution path
+* Git client
+## Clear Docker image cache
+```
+$ docker images prune -a
+```
+## Download scanner
+```
+$ git clone https://github.com/bvboe/lacework-kubernetes-scanner
+Cloning into 'lacework-kubernetes-scanner'...
+remote: Enumerating objects: 24, done.
+remote: Counting objects: 100% (24/24), done.
+remote: Compressing objects: 100% (19/19), done.
+remote: Total 24 (delta 6), reused 17 (delta 3), pack-reused 0
+Receiving objects: 100% (24/24), 4.90 KiB | 2.45 MiB/s, done.
+Resolving deltas: 100% (6/6), done.
+
+$ cd lacework-kubernetes-scanner/src
+```
+## Configure scanner
+See https://support.lacework.com/hc/en-us/articles/1500001777821-Integrate-Inline-Scanner for information on how to configure the lw-scanner.
+```
+$ export ACCESS_TOKEN=<insert-token-here>
+$ export ACCOUNT_NAME=<insert-accunt-name-here>
+```
+## Start scanner
+```
+$ ./scanner-daemon.sh
+Mon Aug 16 09:09:20 EDT 2021 Scanning running images in the background
+Mon Aug 16 09:09:20 EDT 2021 Starting daemon
+```
+## Test scanner
+In a separate window, run the following command to download an image:
+```
+$ docker pull nginx:latest
+latest: Pulling from library/nginx
+```
+Observe the scan automatically running in the other window.
+
+## Scan cache
+Note that the scanner keeps a cache of already scanned images in `/tmp/scan-cache.txt`, which can be cleared by deleting the file.
