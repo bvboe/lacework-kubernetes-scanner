@@ -19,7 +19,7 @@ See https://support.lacework.com/hc/en-us/articles/1500001777821-Integrate-Inlin
 ```
 kubectl create secret generic lacework-kubernetes-scanner-credentials \
   --from-literal=access_token=<insert-token-here> \
-  --from-literal=account-name=<insert-accunt-name-here>
+  --from-literal=account_name=<insert-accunt-name-here>
 ```
 
 ## Deploy Kubernetes scanner
