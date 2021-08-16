@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+
+kind: DaemonSet
+metadata:
+  name: lacework-kubernetes-scanner
+  labels:
+    tier: monitoring
+    app: lacework-kubernetes-scanner
+spec:
+  selector:
+    matchLabels:
+      name: lacework-kubernetes-scanner
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: lacework-kubernetes-scanner
+    spec:
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+      terminationGracePeriodSeconds: 20
+      containers:
+      - name: lacework-kubernetes-scanner
+        image: bjornvb/c-test:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "512Mi"
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - name: run-sock
+            mountPath: /var/run/docker.sock
+        env:
+        - name: ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: lacework-kubernetes-scanner-credentials
+              key: access_token
+        - name: ACCOUNT_NAME
+          valueFrom:
+            secretKeyRef:
+              name: lacework-kubernetes-scanner-credentials
+              key: account_name
+      volumes:
+        - name: run-sock
+          hostPath:
+              path: /var/run/docker.sock

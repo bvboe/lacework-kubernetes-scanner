@@ -21,7 +21,7 @@ then
 fi
 
 echo `date` Do scan
-lw-scanner evaluate $IMAGE $TAG
+lw-scanner evaluate $IMAGE $TAG -t $ACCESS_TOKEN -n $ACCOUNT_NAME
 
 echo `date` Registering scan in cache
 echo "$SHA" >> $SCAN_CACHE_FILE
