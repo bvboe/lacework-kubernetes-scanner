@@ -26,7 +26,7 @@ kubectl create secret generic lacework-kubernetes-scanner-credentials \
 
 ## Deploy Kubernetes scanner
 ```
-$ kubectl apply -f apply -f https://raw.githubusercontent.com/bvboe/lacework-kubernetes-scanner/main/lacework-kubernetes-scanner.yaml
+$ kubectl apply -f -f https://raw.githubusercontent.com/bvboe/lacework-kubernetes-scanner/main/lacework-kubernetes-scanner.yaml
 daemonset.apps/lacework-kubernetes-scanner created
 ```
 
