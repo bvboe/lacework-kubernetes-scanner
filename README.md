@@ -3,7 +3,7 @@ Scan any image running in your Kubernetes cluster, using the Lacework image scan
 
 Note:
 * This scanner only works with Docker based Kubernetes distributions
-* It has only been tested using Minikube
+* It has been tested using Minikube and Docker based Kubernetes deployed using Kubeadm
 
 # How to run using Minikube on your Mac desktop
 This required Docker Desktop already running.
