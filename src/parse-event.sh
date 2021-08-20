@@ -29,7 +29,7 @@ then
 fi
 
 echo `date` Do scan
-lw-scanner evaluate $IMAGE $TAG -t $LW_SCANNER_ACCESS_TOKEN -n $LW_ACCOUNT_NAME
+lw-scanner evaluate $IMAGE $TAG -t $LW_SCANNER_ACCESS_TOKEN -n $LW_ACCOUNT_NAME --scan-library-packages
 
 echo `date` Registering scan in cache
 echo "$SHA" >> $SCAN_CACHE_FILE
