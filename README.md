@@ -3,7 +3,7 @@ Scan any image running in your Kubernetes cluster, using the Lacework image scan
 
 Note:
 * This scanner only works with Docker based Kubernetes distributions
-* It has only been tested using Minikube
+* It has been tested using Minikube and Docker based Kubernetes deployed using Kubeadm
 
 # How to run using Minikube on your Mac desktop
 This required Docker Desktop already running.
@@ -14,17 +14,19 @@ $ brew install minikube
 $ minikube start
 ```
 
-## Create credentials for lw-scanner.
-See https://support.lacework.com/hc/en-us/articles/1500001777821-Integrate-Inline-Scanner for information on how to configure the lw-scanner.
+## Create credentials for lw-scanner and lacework cli
+See https://support.lacework.com/hc/en-us/articles/1500001777821-Integrate-Inline-Scanner and https://support.lacework.com/hc/en-us/articles/1500001558282-Install-and-Configure-the-Lacework-CLI for more information.
 ```
 kubectl create secret generic lacework-kubernetes-scanner-credentials \
-  --from-literal=access_token=<insert-token-here> \
-  --from-literal=account_name=<insert-accunt-name-here>
+  --from-literal=lw_scanner_access_token=<insert-lw-scanner-token-here> \
+  --from-literal=lw_account_name=<insert-lw-accunt-name-here> \
+  --from-literal=lw_api_key=<insert-lw-api-key> \
+  --from-literal=lw_api_secret=<insert-lw-api-secret>
 ```
 
 ## Deploy Kubernetes scanner
 ```
-$ kubectl apply -f apply -f https://raw.githubusercontent.com/bvboe/lacework-kubernetes-scanner/main/lacework-kubernetes-scanner.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/bvboe/lacework-kubernetes-scanner/main/lacework-kubernetes-scanner.yaml
 daemonset.apps/lacework-kubernetes-scanner created
 ```
 
@@ -102,11 +104,13 @@ Resolving deltas: 100% (6/6), done.
 
 $ cd lacework-kubernetes-scanner/src
 ```
-## Configure scanner
-See https://support.lacework.com/hc/en-us/articles/1500001777821-Integrate-Inline-Scanner for information on how to configure the lw-scanner.
+## Configure scanner and lacework cli
+See https://support.lacework.com/hc/en-us/articles/1500001777821-Integrate-Inline-Scanner and https://support.lacework.com/hc/en-us/articles/1500001558282-Install-and-Configure-the-Lacework-CLI for more information.
 ```
-$ export ACCESS_TOKEN=<insert-token-here>
-$ export ACCOUNT_NAME=<insert-accunt-name-here>
+$ export LW_SCANNER_ACCESS_TOKEN=<insert-lw-scanner-token-here>
+$ export LW_ACCOUNT_NAME=<insert-lw-accunt-name-here>
+$ export LW_API_KEY=<insert-lw-api-key>
+$ export LW_API_SECRET=<insert-lw-api-secret>
 ```
 ## Start scanner
 ```
@@ -123,4 +127,4 @@ latest: Pulling from library/nginx
 Observe the scan automatically running in the other window.
 
 ## Scan cache
-Note that the scanner keeps a cache of already scanned images in `/tmp/scan-cache.txt`, which can be cleared by deleting the file.
+Note that the scanner keeps a cache of already scanned images in `/tmp/scan-cache.txt`, which can be cleared by deleting the file. It's also querying the lacework API to ensure each image is only scanned once.
