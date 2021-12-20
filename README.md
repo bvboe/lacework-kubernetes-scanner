@@ -1,4 +1,6 @@
 # Lacework Kubernetes Image Scanner
+
+[![IaC](https://app.soluble.cloud/api/v1/public/badges/ce5c8547-8a39-46b4-a692-5ab303b37293.svg)](https://app.soluble.cloud/repos/details/github.com/bvboe/lacework-kubernetes-scanner)  [![CIS](https://app.soluble.cloud/api/v1/public/badges/72030f4a-135b-4124-8809-a7d48d7e2988.svg)](https://app.soluble.cloud/repos/details/github.com/bvboe/lacework-kubernetes-scanner)  
 Scan any image running in your Kubernetes cluster, using the Lacework image scanner.
 
 Note:
